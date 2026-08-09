@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Export ChatGPT Conversation — Privacy Policy</title>
+<style>
+  :root{
+    --bg:#122a22; --bg2:#070c0b; --warm:#7ad6a5; --ink:#e2ece7; --ink-dim:#8fa39b;
+    --line:rgba(255,255,255,.09);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    background:radial-gradient(130% 90% at 50% 0%, var(--bg) 0%, var(--bg2) 68%);
+    color:var(--ink); min-height:100vh;
+    font:16px/1.62 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    display:flex; flex-direction:column; align-items:center;
+    padding:clamp(28px,6vh,64px) 20px 64px;
+  }
+  main{width:100%; max-width:660px}
+  h1{font-size:clamp(26px,4.2vw,38px); font-weight:600; letter-spacing:-.02em; margin:0 0 6px}
+  .updated{color:var(--ink-dim); font-size:14px; margin:0 0 clamp(24px,4vh,36px)}
+  h2{font-size:clamp(17px,2.4vw,20px); font-weight:600; letter-spacing:-.01em; margin:32px 0 8px; color:#fff}
+  p{margin:0 0 12px}
+  .lead{font-size:clamp(17px,2.2vw,19px); max-width:54ch}
+  .lead b{color:var(--warm); font-weight:600}
+  ul{margin:0 0 12px; padding:0 0 0 4px; list-style:none}
+  li{position:relative; padding:6px 0 6px 24px}
+  li::before{content:""; position:absolute; left:2px; top:14px; width:6px; height:6px; border-radius:50%; background:var(--warm); opacity:.75}
+  code{font:13.5px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace; background:rgba(255,255,255,.06); padding:1px 6px; border-radius:5px}
+  a{color:var(--warm)}
+  .foot{margin-top:40px; padding-top:20px; border-top:1px solid var(--line); color:var(--ink-dim); font-size:14px}
+</style>
+</head>
+<body>
+<main>
+
+  <h1>Privacy Policy</h1>
+  <p class="updated">Export ChatGPT Conversation · Last updated 7 August 2026</p>
+
+  <p class="lead">This extension exports a ChatGPT conversation to PDF. To do that, the conversation is sent to
+  our rendering server and comes back as a file. <b>We do not store your conversations, and we never sell
+  any data.</b> This page explains exactly what leaves your device, and what does not.</p>
+
+  <h2>What the extension sends, and when</h2>
+  <p>Nothing is sent until you press Export. When you do, two things happen:</p>
+  <ul>
+    <li><b>Your conversation goes to our rendering server.</b> The extension takes the conversation you are
+      viewing — its text, and the images inside it, which it loads from your own ChatGPT session — and sends
+      it over an encrypted connection (HTTPS) to <code>export-gpt.duckdns.org</code>. That server turns it
+      into a PDF and returns the file to your browser.</li>
+    <li><b>A usage event goes to Google Analytics.</b> See “Usage statistics” below.</li>
+  </ul>
+  <p>Conversations are processed only for as long as it takes to produce your PDF, and are not saved by us
+  afterwards. Like any web server, ours keeps standard access logs — IP address, time, and request size —
+  which are used to keep the service running and to prevent abuse. Those logs contain no conversation text.</p>
+
+  <h2>Usage statistics</h2>
+  <p>The extension sends three plain counters to Google Analytics so we can tell whether exports actually
+  succeed for people:</p>
+  <ul>
+    <li><code>export_completed</code> — an export finished successfully.</li>
+    <li><code>export_selected_used</code> — the “select blocks” export was used.</li>
+    <li><code>export_failed</code> — an export failed, with a coarse reason such as “too large”,
+      “network”, or an HTTP status code.</li>
+  </ul>
+  <p>These events carry <b>no conversation content, no page text, no titles and no web addresses</b>. They are
+  tagged with a random identifier that the extension generates the first time you use it and keeps on your own
+  device (<code>ga4_client_id</code> in local extension storage), so that repeat use is not counted as a new
+  person. It is not linked to your name, your email, or your ChatGPT account, and we cannot use it to identify
+  you. Copies of the extension loaded locally for development send nothing at all.</p>
+
+  <h2>What stays on your device</h2>
+  <p>Your export settings — page format, margins, theme, scale and similar preferences — are saved in your own
+  browser using Chrome’s <code>storage</code> API, together with the random analytics identifier above. This
+  data is never sent to us. Removing the extension removes it.</p>
+
+  <h2>What we never collect</h2>
+  <ul>
+    <li>No accounts, no sign-up, no passwords.</li>
+    <li>No names, email addresses, phone numbers or postal addresses.</li>
+    <li>No payment information — the extension is free and takes no payments.</li>
+    <li>No browsing history, and no reading of pages other than the conversation you choose to export.</li>
+    <li>No advertising, no advertising identifiers, and no sale or transfer of data to data brokers.</li>
+  </ul>
+
+  <h2>Why the extension asks for permissions</h2>
+  <ul>
+    <li><code>storage</code> — remember your settings locally, as described above.</li>
+    <li><code>tabs</code> — know which tab you pressed Export on, so the right conversation is captured.</li>
+    <li>access to <code>chatgpt.com</code> content and to
+      <code>oaiusercontent.com</code> / <code>images.openai.com</code> — read the conversation you are
+      exporting and load the images inside it, so they appear in the PDF.</li>
+    <li>access to <code>export-gpt.duckdns.org</code> — send the conversation for rendering and receive the
+      PDF back.</li>
+    <li>access to <code>google-analytics.com</code> — send the three counters described above.</li>
+  </ul>
+
+  <h2>Who else sees this data</h2>
+  <p>Only Google Analytics, and only the counters described above. We do not sell data, we do not share it
+  with advertisers or data brokers, and we do not use it for anything unrelated to making this extension work.
+  Our use of data complies with the
+  <a href="https://developer.chrome.com/docs/webstore/program-policies/limited-use/">Chrome Web Store Limited
+  Use policy</a>.</p>
+
+  <h2>Our web pages</h2>
+  <p>The welcome and uninstall pages on this site are ordinary web pages, separate from the extension. They use
+  Google Analytics, which sets cookies in the normal way, to count visits.</p>
+
+  <h2>Your choices</h2>
+  <p>You can stop all analytics from the extension by removing it, or by installing Google’s
+  <a href="https://tools.google.com/dlpage/gaoptout">Analytics Opt-out Browser Add-on</a>. If you want the data
+  associated with your random identifier deleted, email us and we will remove it.</p>
+
+  <h2>Children</h2>
+  <p>The extension is not directed at children under 13, and we do not knowingly collect personal information
+  from them.</p>
+
+  <h2>Changes to this policy</h2>
+  <p>If this policy changes, the “Last updated” date above changes with it.</p>
+
+  <h2>Contact</h2>
+  <p>Questions about privacy? Email <a href="mailto:panarin2005@gmail.com">panarin2005@gmail.com</a>.</p>
+
+  <p class="foot">This policy applies to the Export ChatGPT Conversation browser extension for Chrome and to
+  the pages on this site.</p>
+
+</main>
+</body>
+</html>
