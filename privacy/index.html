@@ -66,6 +66,8 @@
     <li><code>export_failed</code> — an export failed, with a coarse reason such as “too large”,
       “network”, or an HTTP status code.</li>
   </ul>
+  <p>Completed and failed exports also note which version of the ChatGPT page they ran on — the redesign
+  ChatGPT began rolling out in September 2026, or the earlier page — so we can see that exports work on both.</p>
   <p>These events carry <b>no conversation content, no page text, no titles and no web addresses</b>. They are
   tagged with a random identifier that the extension generates the first time you use it and keeps on your own
   device (<code>ga4_client_id</code> in local extension storage), so that repeat use is not counted as a new
