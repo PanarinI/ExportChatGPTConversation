@@ -5,12 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Export ChatGPT Conversation was removed</title>
 <style>
-  /* Канон 5.1: страница после удаления — один вопрос «почему удалили» (Google-форма), чем проще, тем больше ответов.
-     Палитра — как на welcome: светлое поле ChatGPT, чернила #0d0d0d, оранжевый градиент иконки.
-     Карточка формы — по образцу fib-pages/uninstall (28.09): чернильная обводка и тень-наклейка; тень — градиентом иконки.
-     Ссылки — темнее акцента (--link): #e55a2f на светлом поле читается хуже нормы (3,2–3,6 : 1 при 4,5). */
+  /* Канон 5.1: страница после удаления — один вопрос «почему удалили», чем проще, тем больше ответов.
+     Главное на странице — сам вопрос (слово автора 28.09: «нужно, чтобы главным был вопрос what went wrong?»).
+     Интерфейса Google Forms на странице нет: своё поле шлёт ответ прямо в ту же форму (formResponse) —
+     ответы ложатся в ту же таблицу. Палитра — welcome: светлое поле ChatGPT, чернила #0d0d0d, градиент иконки.
+     Карточка — наклейка: чернильная обводка, жёсткая тень градиентом иконки. Ссылки темнее акцента #e55a2f:
+     тот на светлом поле читается хуже нормы (3,2–3,6 : 1 при 4,5). */
   :root{ --bg:#ffffff; --bg2:#f1f1f1; --ink:#0d0d0d; --ink-dim:#5d5d5d; --link:#b8431c; --hot1:#ff9a3d; --hot2:#ff4d1f; }
   *{box-sizing:border-box}
+  [hidden]{display:none !important}
   html,body{margin:0}
   html{background:var(--bg2)}
   body{
@@ -20,63 +23,117 @@
     min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center;
     padding:clamp(28px,6vh,64px) 20px 56px;
   }
+  .removed{
+    display:flex; align-items:center; justify-content:center; gap:10px;
+    margin:0 0 10px; font-size:15px; color:var(--ink-dim); text-align:center;
+  }
+  /* иконка чуть погашена — расширения больше нет */
+  .removed img{width:28px; height:28px; flex:none; transform:rotate(-8deg); filter:grayscale(.25); opacity:.9}
   h1{
-    display:flex; align-items:center; gap:14px;
-    font-size:clamp(26px,4vw,38px); font-weight:700; letter-spacing:-.02em;
-    margin:0 0 12px; text-align:center;
+    margin:0 0 clamp(22px,4vh,34px); text-align:center;
+    font-size:clamp(36px,6.4vw,58px); line-height:1.08; font-weight:700; letter-spacing:-.03em;
   }
-  /* иконка чуть погашена — расширения больше нет; наклон и жёсткая тень — как у образца */
-  h1 img{width:40px; height:40px; flex:none; transform:rotate(-8deg); filter:grayscale(.25) drop-shadow(3px 3px 0 var(--ink)); opacity:.9}
-  .say{
-    margin:0 0 clamp(22px,3.5vh,34px); text-align:center;
-    font-size:clamp(15px,2vw,18px); color:var(--ink-dim); max-width:48ch;
-  }
-  .say b{color:var(--ink); font-weight:600}
   /* тень-наклейка: сдвинутая подложка с градиентом иконки (box-shadow градиент не умеет).
      Поворот и подложка — на обёртке: у повёрнутой карточки подложка «под ней» ложилась бы поверх её фона. */
-  .sticker{ width:100%; max-width:640px; position:relative; transform:rotate(-.5deg); }
+  .sticker{ width:100%; max-width:560px; position:relative; transform:rotate(-.5deg); }
   .sticker::before{
     content:""; position:absolute; inset:0; border-radius:20px;
     background:linear-gradient(135deg, var(--hot1) 0%, var(--hot2) 100%); transform:translate(7px,7px);
   }
   .card{ position:relative; background:#fff; border:3px solid var(--ink); border-radius:20px; padding:18px; }
-  .card iframe{ display:block; width:100%; height:520px; border:none; border-radius:10px; background:transparent; }
-  .fallback{ text-align:center; color:var(--ink-dim); font-size:16px; font-weight:600; padding:22px 10px; }
-  .fallback a{ color:var(--link); font-weight:700; text-decoration:none; }
-  .fallback a:hover{ text-decoration:underline; }
-  .back{ margin-top:26px; font-size:14px; color:var(--ink-dim); text-align:center; }
-  .back a{ color:var(--link); text-decoration:none; font-weight:600; }
-  .back a:hover{ text-decoration:underline; }
-  /* узкое окно: иконка над заголовком (иначе строки уезжают вправо от оси), форме — больше места */
-  @media (max-width:520px){ h1{flex-direction:column; gap:10px} }
-  @media (max-width:440px){ .card{padding:10px} .card iframe{height:600px} }
+  textarea{
+    display:block; width:100%; min-height:128px; resize:vertical; margin:0;
+    font-family:inherit; font-size:18px; line-height:1.5; color:var(--ink); background:#f7f7f7;
+    border:2px solid #dedede; border-radius:12px; padding:14px 16px;
+  }
+  textarea::placeholder{color:#707070}
+  textarea:focus{outline:none; border-color:var(--ink); background:#fff; box-shadow:0 0 0 3px rgba(255,77,31,.22)}
+  .row{display:flex; justify-content:flex-end; margin-top:14px}
+  button{
+    font-family:inherit; font-weight:700; font-size:17px; line-height:1; color:#fff; background:var(--ink);
+    border:3px solid var(--ink); border-radius:12px; padding:12px 28px; cursor:pointer;
+    box-shadow:4px 4px 0 var(--hot2); transition:transform .06s, box-shadow .06s;
+  }
+  button:active{transform:translate(3px,3px); box-shadow:1px 1px 0 var(--hot2)}
+  button:focus-visible{outline:3px solid var(--ink); outline-offset:3px}
+  button[aria-disabled="true"]{opacity:.7; cursor:progress}
+  .done:focus{outline:none}
+  button:disabled{opacity:.3; cursor:default; box-shadow:none; transform:none}
+  .done{padding:30px 10px; text-align:center; font-size:20px; font-weight:700}
+  .failed{margin:18px 0 0; font-size:15px; color:var(--ink-dim); text-align:center; max-width:46ch}
+  .failed a, .back a{color:var(--link); text-decoration:none; font-weight:600}
+  .failed a:hover, .back a:hover{text-decoration:underline}
+  /* узкий телефон: иконка над строкой «…was removed», иначе слово уезжает на вторую строку сбоку от иконки */
+  @media (max-width:420px){ .removed{flex-direction:column; gap:6px} }
+  .back{margin-top:30px; font-size:14px; color:var(--ink-dim); text-align:center}
 </style>
 </head>
 <body>
 
-  <h1><img src="icon.png" alt="">Export ChatGPT Conversation was removed</h1>
-  <p class="say">Thank you for trying it. What made you remove it? One line helps us make the next export better for the next person.</p>
+  <p class="removed"><img src="icon.png" alt="">Export ChatGPT Conversation was removed</p>
+  <h1 id="q">What went wrong?</h1>
 
   <div class="sticker"><div class="card">
-    <iframe id="form" loading="lazy" title="Why did you remove Export ChatGPT Conversation?">Loading…</iframe>
-    <div class="fallback" id="fallback" hidden>
-      Tell us in one line: <a href="mailto:panarin2005@gmail.com?subject=Why%20I%20removed%20Export%20ChatGPT%20Conversation">panarin2005@gmail.com</a>
-    </div>
+    <form id="ask">
+      <textarea id="answer" aria-labelledby="q" placeholder="One line is enough" maxlength="3000" autofocus></textarea>
+      <div class="row"><button type="submit" id="send">Send</button></div>
+    </form>
+    <div class="done" id="done" role="status" tabindex="-1" hidden>Thank you — we got it.</div>
   </div></div>
+
+  <p class="failed" id="failed" role="alert" hidden>
+    It didn’t go through. <a id="mail" href="#">Send it by email instead</a> — your text is already filled in.
+  </p>
 
   <p class="back" id="back" hidden>
     Removed it by mistake? <a id="storelink" href="#" target="_blank" rel="noopener">Install Export ChatGPT Conversation again</a>
   </p>
 
   <script>
-    // Форма — Google Forms с одним вопросом (канон 5.1). Пустой FORM_URL — вместо формы строка с письмом
-    // (адрес тот же, что в политике приватности продукта). Адрес этой страницы зашит в расширение
-    // (`setUninstallURL` в background.js) — файл не переименовывать и не переносить.
-    const FORM_URL  = 'https://docs.google.com/forms/d/e/1FAIpQLScnqBoShBCay5iR6TXtQpthBeu-Ussstey5Nfnxp0_gzZ82CQ/viewform?embedded=true';
+    // Адрес этой страницы зашит в расширение (`setUninstallURL` в background.js) — файл не переименовывать и не переносить.
+    // Ответ уходит в Google-форму автора напрямую (formResponse) — те же ответы, та же таблица, без интерфейса формы.
+    // ENTRY — номер единственного поля этой формы; сверен 28.09 подстановкой (viewform?usp=pp_url&entry.…).
+    // Правка вопроса в Google Forms может сменить номер — тогда сверить заново.
+    // no-cors: ответа Google страница не видит; сеть не ответила — предлагаем письмо с уже вписанным текстом.
+    const FORM_ID   = '1FAIpQLScnqBoShBCay5iR6TXtQpthBeu-Ussstey5Nfnxp0_gzZ82CQ';
+    const ENTRY     = 'entry.1929404604';
+    const EMAIL     = 'panarin2005@gmail.com';   // тот же адрес, что в политике приватности продукта
+    const SUBJECT   = 'Why I removed Export ChatGPT Conversation';
     const STORE_URL = 'https://chromewebstore.google.com/detail/aighdeikamhkemngfanhnamdlpoceimo';
-    const f = document.getElementById('form');
-    if (FORM_URL) { f.src = FORM_URL; }
-    else { f.remove(); document.getElementById('fallback').hidden = false; }
+
+    const form = document.getElementById('ask'), ta = document.getElementById('answer'), send = document.getElementById('send');
+    let sending = false;
+    // Enter — отправить (ответ в одну строку, как в чате); Shift+Enter — новая строка
+    ta.addEventListener('keydown', e => {
+      if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); form.requestSubmit(); }
+    });
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      const text = ta.value.trim();
+      if (sending) return;
+      if (!text) { ta.focus(); return; }   // пустое поле — вернуть в поле; кнопка не гаснет (серая кнопка — «то, чего нет», дизайн-код fib)
+      // пока идёт отправка: поле только для чтения (иначе правка молча не уйдёт), кнопка не гаснет через disabled —
+      // иначе фокус с неё падает на body; повтор держит флаг sending
+      sending = true; ta.readOnly = true; send.setAttribute('aria-disabled', 'true'); send.textContent = 'Sending…';
+      document.getElementById('failed').hidden = true;
+      const body = new URLSearchParams({ [ENTRY]: text, fvv: '1', pageHistory: '0' });
+      try {
+        // keepalive — ответ дойдёт, даже если вкладку закрыли во время отправки;
+        // таймаут — зависшая сеть через 10 с уходит в запасной путь письмом, а не держит «Sending…» минуту
+        await fetch(`https://docs.google.com/forms/d/e/${FORM_ID}/formResponse`,
+          { method: 'POST', mode: 'no-cors', body, keepalive: true, signal: AbortSignal.timeout(10000) });
+        form.hidden = true;
+        const done = document.getElementById('done');
+        done.hidden = false; done.focus();
+      } catch (err) {
+        document.getElementById('failed').hidden = false;
+        ta.readOnly = false; send.removeAttribute('aria-disabled'); send.textContent = 'Send'; sending = false;
+      }
+    });
+    // письмо собирается в момент щелчка — из того, что в поле сейчас
+    document.getElementById('mail').addEventListener('click', e => {
+      e.currentTarget.href = `mailto:${EMAIL}?subject=${encodeURIComponent(SUBJECT)}&body=${encodeURIComponent(ta.value.trim())}`;
+    });
     if (STORE_URL) {
       document.getElementById('storelink').href = STORE_URL;
       document.getElementById('back').hidden = false;
