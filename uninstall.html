@@ -1,61 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>You've removed Export ChatGPT</title>
-  <style>
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: #f9f9f9;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 40px 20px;
-    }
-    .card {
-      background: #fff;
-      border: 1px solid #ebebeb;
-      border-radius: 16px;
-      padding: 32px 32px 24px;
-      max-width: 560px;
-      width: 100%;
-      text-align: center;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-    }
-    .brand {
-      font-size: 13px;
-      font-weight: 500;
-      color: #bbb;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      margin-bottom: 16px;
-    }
-    iframe {
-      display: block;
-      width: 100%;
-      height: 480px;
-      border: none;
-      margin-bottom: 20px;
-    }
-    .reinstall { font-size: 13px; color: #999; }
-    .reinstall a { color: #EA4C3A; text-decoration: none; font-weight: 600; }
-    .reinstall a:hover { text-decoration: underline; }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Export ChatGPT Conversation was removed</title>
+<style>
+  /* Канон 5.1: страница после удаления — один вопрос «почему удалили» (Google-форма), чем проще, тем больше ответов.
+     Палитра — как на welcome: светлое поле ChatGPT, чернила #0d0d0d, оранжевый градиент иконки.
+     Карточка формы — по образцу fib-pages/uninstall (28.09): чернильная обводка и тень-наклейка; тень — градиентом иконки.
+     Ссылки — темнее акцента (--link): #e55a2f на светлом поле читается хуже нормы (3,2–3,6 : 1 при 4,5). */
+  :root{ --bg:#ffffff; --bg2:#f1f1f1; --ink:#0d0d0d; --ink-dim:#5d5d5d; --link:#b8431c; --hot1:#ff9a3d; --hot2:#ff4d1f; }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  html{background:var(--bg2)}
+  body{
+    background:radial-gradient(130% 90% at 50% 0%, var(--bg) 0%, var(--bg2) 70%);
+    color:var(--ink);
+    font:16px/1.55 ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    padding:clamp(28px,6vh,64px) 20px 56px;
+  }
+  h1{
+    display:flex; align-items:center; gap:14px;
+    font-size:clamp(26px,4vw,38px); font-weight:700; letter-spacing:-.02em;
+    margin:0 0 12px; text-align:center;
+  }
+  /* иконка чуть погашена — расширения больше нет; наклон и жёсткая тень — как у образца */
+  h1 img{width:40px; height:40px; flex:none; transform:rotate(-8deg); filter:grayscale(.25) drop-shadow(3px 3px 0 var(--ink)); opacity:.9}
+  .say{
+    margin:0 0 clamp(22px,3.5vh,34px); text-align:center;
+    font-size:clamp(15px,2vw,18px); color:var(--ink-dim); max-width:48ch;
+  }
+  .say b{color:var(--ink); font-weight:600}
+  /* тень-наклейка: сдвинутая подложка с градиентом иконки (box-shadow градиент не умеет).
+     Поворот и подложка — на обёртке: у повёрнутой карточки подложка «под ней» ложилась бы поверх её фона. */
+  .sticker{ width:100%; max-width:640px; position:relative; transform:rotate(-.5deg); }
+  .sticker::before{
+    content:""; position:absolute; inset:0; border-radius:20px;
+    background:linear-gradient(135deg, var(--hot1) 0%, var(--hot2) 100%); transform:translate(7px,7px);
+  }
+  .card{ position:relative; background:#fff; border:3px solid var(--ink); border-radius:20px; padding:18px; }
+  .card iframe{ display:block; width:100%; height:520px; border:none; border-radius:10px; background:transparent; }
+  .fallback{ text-align:center; color:var(--ink-dim); font-size:16px; font-weight:600; padding:22px 10px; }
+  .fallback a{ color:var(--link); font-weight:700; text-decoration:none; }
+  .fallback a:hover{ text-decoration:underline; }
+  .back{ margin-top:26px; font-size:14px; color:var(--ink-dim); text-align:center; }
+  .back a{ color:var(--link); text-decoration:none; font-weight:600; }
+  .back a:hover{ text-decoration:underline; }
+  /* узкое окно: иконка над заголовком (иначе строки уезжают вправо от оси), форме — больше места */
+  @media (max-width:520px){ h1{flex-direction:column; gap:10px} }
+  @media (max-width:440px){ .card{padding:10px} .card iframe{height:600px} }
+</style>
 </head>
 <body>
-  <div class="card">
-    <p class="brand">Export ChatGPT</p>
-    <iframe
-      src="https://docs.google.com/forms/d/e/1FAIpQLScnqBoShBCay5iR6TXtQpthBeu-Ussstey5Nfnxp0_gzZ82CQ/viewform?embedded=true"
-      loading="lazy"
-    >Loading…</iframe>
-    <p class="reinstall">
-      Changed your mind?
-      <a href="https://chromewebstore.google.com/detail/aighdeikamhkemngfanhnamdlpoceimo" target="_blank">Reinstall the extension</a>
-    </p>
-  </div>
+
+  <h1><img src="icon.png" alt="">Export ChatGPT Conversation was removed</h1>
+  <p class="say">Thank you for trying it. What made you remove it? One line helps us make the next export better for the next person.</p>
+
+  <div class="sticker"><div class="card">
+    <iframe id="form" loading="lazy" title="Why did you remove Export ChatGPT Conversation?">Loading…</iframe>
+    <div class="fallback" id="fallback" hidden>
+      Tell us in one line: <a href="mailto:panarin2005@gmail.com?subject=Why%20I%20removed%20Export%20ChatGPT%20Conversation">panarin2005@gmail.com</a>
+    </div>
+  </div></div>
+
+  <p class="back" id="back" hidden>
+    Removed it by mistake? <a id="storelink" href="#" target="_blank" rel="noopener">Install Export ChatGPT Conversation again</a>
+  </p>
+
+  <script>
+    // Форма — Google Forms с одним вопросом (канон 5.1). Пустой FORM_URL — вместо формы строка с письмом
+    // (адрес тот же, что в политике приватности продукта). Адрес этой страницы зашит в расширение
+    // (`setUninstallURL` в background.js) — файл не переименовывать и не переносить.
+    const FORM_URL  = 'https://docs.google.com/forms/d/e/1FAIpQLScnqBoShBCay5iR6TXtQpthBeu-Ussstey5Nfnxp0_gzZ82CQ/viewform?embedded=true';
+    const STORE_URL = 'https://chromewebstore.google.com/detail/aighdeikamhkemngfanhnamdlpoceimo';
+    const f = document.getElementById('form');
+    if (FORM_URL) { f.src = FORM_URL; }
+    else { f.remove(); document.getElementById('fallback').hidden = false; }
+    if (STORE_URL) {
+      document.getElementById('storelink').href = STORE_URL;
+      document.getElementById('back').hidden = false;
+    }
+  </script>
 </body>
 </html>
